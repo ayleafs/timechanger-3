@@ -43,8 +43,10 @@ public class ChangeTime implements ICommand {
             return;
         }
 
-        TimeMode mode = TimeMode.STATIC;
-        // check if they specified a mode (use static if not)
+        // make the default mode the one they're currently using
+        TimeMode mode = config.getMode();
+
+        // check if they specified a mode
         if (args.length >= 2) {
             mode = TimeMode.valueOr(args[1], mode);
         }
