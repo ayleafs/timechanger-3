@@ -1,0 +1,12 @@
+[
+  {
+    "modid": "timechanger",
+    "name": "TimeChanger",
+    "description": "TimeChanger with some additions to it.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "authorList": [
+      "leafs"
+    ]
+  }
+]
