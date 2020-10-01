@@ -3,6 +3,7 @@ package me.leafs.timechanger;
 import lombok.Getter;
 import me.leafs.timechanger.command.ChangeTime;
 import me.leafs.timechanger.handler.TimeHandler;
+import me.leafs.timechanger.handler.config.ConfigHandler;
 import me.leafs.timechanger.handler.config.TimeConfiguration;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -20,12 +21,15 @@ public class TimeChanger {
     public static TimeChanger instance;
 
     @Getter private TimeConfiguration config;
+    @Getter private ConfigHandler configHandler;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        config = new TimeConfiguration();
+        configHandler = new ConfigHandler(event.getSuggestedConfigurationFile());
+        config = configHandler.readConfig();
 
-        // TODO: 9/30/2020 config saving and loading and shit
+        // make sure the config saves on shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> configHandler.populateConfig(config)));
     }
 
     @EventHandler
