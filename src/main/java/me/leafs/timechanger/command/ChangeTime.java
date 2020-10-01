@@ -18,7 +18,7 @@ public class ChangeTime implements ICommand {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/settime <time | speed> [static | dynamic]";
+        return "/settime <'toggle' | time | speed> [static | dynamic]";
     }
 
     @Override
