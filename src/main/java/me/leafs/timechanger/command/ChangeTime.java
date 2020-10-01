@@ -33,13 +33,21 @@ public class ChangeTime implements ICommand {
             return;
         }
 
+        TimeConfiguration config = TimeChanger.instance.getConfig();
+
+        if (args.length == 1 && args[0].equalsIgnoreCase("toggle")) {
+            boolean enabled = !config.isEnabled();
+            config.setEnabled(enabled);
+
+            ChatUtils.printChat(String.format("§7You toggled time changer %s§7, that's crazy.", (enabled) ? "§aon" : "§coff"));
+            return;
+        }
+
         TimeMode mode = TimeMode.STATIC;
         // check if they specified a mode (use static if not)
         if (args.length >= 2) {
             mode = TimeMode.valueOr(args[1], mode);
         }
-
-        TimeConfiguration config = TimeChanger.instance.getConfig();
 
         // I hate how indented this block is
         // but... shut up

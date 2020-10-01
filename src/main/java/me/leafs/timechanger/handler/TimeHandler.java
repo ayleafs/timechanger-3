@@ -27,6 +27,10 @@ public class TimeHandler extends ChannelInboundHandlerAdapter {
 
         TimeConfiguration config = TimeChanger.instance.getConfig();
 
+        if (!config.isEnabled()) {
+            return;
+        }
+
         // set the time (depending on mode)
         switch (config.getMode()) {
             case DYNAMIC:
@@ -44,8 +48,8 @@ public class TimeHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // block any time packets
-        if (msg instanceof S03PacketTimeUpdate) {
+        // block any time packets if the mod is enabled
+        if (msg instanceof S03PacketTimeUpdate && TimeChanger.instance.getConfig().isEnabled()) {
             return;
         }
 
