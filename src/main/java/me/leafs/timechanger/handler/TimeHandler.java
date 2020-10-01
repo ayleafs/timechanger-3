@@ -1,5 +1,6 @@
 package me.leafs.timechanger.handler;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelPipeline;
@@ -10,6 +11,7 @@ import net.minecraft.network.play.server.S03PacketTimeUpdate;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+@ChannelHandler.Sharable // bitchass
 public class TimeHandler extends ChannelInboundHandlerAdapter {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
